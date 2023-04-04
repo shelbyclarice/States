@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Week 8: Arrays</title>
+    <link rel="stylesheet" href="style.css" />
+    <script>
+      // This Website is about choosing a state for a presentation. One state per student. No student can use the same state and therefore you enter the choosen state and check if it's available. If it is available, it will add that state to the list so that it is not longer available.
+
+      // Setting up an array of states
+      var state_names = [
+        "Alabama",
+        "Alaska",
+        "Arizona",
+        "Arkansas",
+        "California",
+      ];
+
+      // function to display the array as a list
+      function displayList() {
+        var list = document.getElementById("list");
+        list.innerHTML = ""; // clear the existing list
+
+        for (var i = 0; i < state_names.length; i++) {
+          var item = document.createElement("li");
+          item.appendChild(document.createTextNode(state_names[i]));
+          list.appendChild(item);
+        }
+      }
+
+      // Is the state available?
+      function IsStateInArray() {
+        var newState = prompt(
+          "Enter a state and we will see if this state is available."
+        );
+        if (state_names.includes(newState)) {
+          alert(
+            "Sorry! This state is taken. Please choose another state. " +
+              newState
+            // No state is not available
+          );
+        } else {
+          alert("Congratulations! The state is available: " + newState);
+          state_names.push(newState);
+          // Yes state is available and gets added on the list
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h1>State Presentation! Choose your State Here</h1>
+    <p>
+      One State per student. Type in a state below to see if the state you want
+      to present is available.
+    </p>
+
+    <!--Form to input a state and check if it's available.-->
+    <form onsubmit="event.preventDefault(); IsStateInArray();">
+      <label for="newStateInput">Enter a state:</label>
+      <input type="text" id="newStateInput" name="newStateInput" />
+      <button type="submit">Check</button>
+    </form>
+
+    <!--Displays what states are taken when button is clicked on-->
+    <ul id="list"></ul>
+    <button onclick="displayList()">Display List</button>
+
+    <br />
+    <!--Image of the 50 states for reference-->
+    <img src="states.jpg" alt="Image of states" width="600px" />
+  </body>
+</html>
